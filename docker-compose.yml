@@ -1,0 +1,27 @@
+version: '3.8'
+
+name: doctalk
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: doctalk-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: doctalk
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - doctalk-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  doctalk-network:
+    driver: bridge

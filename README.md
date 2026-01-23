@@ -1,36 +1,162 @@
-# GitHub CLI 자동화 테스트 프로젝트
+# DocTalk - Health Consultation Messenger
 
-이 프로젝트는 GitHub CLI를 사용한 자동 PR 생성 기능을 테스트하기 위한 데모입니다.
+DocTalk is a B2B health consultation messenger service that enables real-time communication between doctors and patients.
 
-## 기능
+## Project Structure
 
-- ✅ 자동 브랜치 생성
-- ✅ 자동 커밋
-- ✅ 자동 푸시
-- ✅ 자동 PR 생성
+```
+doctalk-reservation/
+├── backend/          # Express + Socket.io + MongoDB backend
+├── frontend/         # Nuxt.js frontend
+├── docs/            # Project documentation
+└── docker-compose.yml
+```
 
-## 작성자
+## Tech Stack
 
-ymh0951
+### Backend
+- Node.js + Express + TypeScript
+- MongoDB (Mongoose ODM)
+- Socket.io (WebSocket)
+- JWT Authentication
+- Multer (File uploads)
 
-## 상세 설명
+### Frontend
+- Nuxt.js 3
+- Pinia (State management)
+- Socket.io-client
+- SASS (Styling)
+- TypeScript
 
-이 프로젝트는 AI 코딩 어시스턴트가 GitHub CLI를 활용하여 다음과 같은 작업을 자동으로 수행할 수 있음을 보여줍니다:
+## Getting Started
 
-### 자동화 워크플로우
+### Prerequisites
+- Node.js (v18 or higher)
+- Docker and Docker Compose (for MongoDB)
+- npm
 
-1. **코드 수정**: 파일 생성 및 편집
-2. **Git 작업**: 자동 커밋 및 브랜치 관리
-3. **원격 푸시**: GitHub로 변경사항 자동 푸시
-4. **PR 생성**: `gh pr create` 명령어로 풀 리퀘스트 자동 생성
+### 1. Start MongoDB
 
-### 장점
+```bash
+docker-compose up -d
+```
 
-- ⚡ 빠른 개발 속도
-- 🤖 반복 작업 자동화
-- 📝 일관된 커밋 메시지
-- 🔄 효율적인 협업 워크플로우
+This will start MongoDB on `localhost:27017` with:
+- Username: `admin`
+- Password: `admin123`
+- Database: `doctalk`
 
-## 날짜
+### 2. Setup Backend
 
-2026-01-22
+```bash
+cd backend
+npm install
+cp .env.example .env
+```
+
+Edit `.env` file if needed (default values should work for local development).
+
+Start the backend server:
+```bash
+npm run dev
+```
+
+Backend will run on `http://localhost:3001`
+
+### 3. Setup Frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+```
+
+Edit `.env` file if needed (default values should work for local development).
+
+Start the frontend dev server:
+```bash
+npm run dev
+```
+
+Frontend will run on `http://localhost:3000`
+
+## Testing Phase 1 (Authentication)
+
+### Registration
+1. Open `http://localhost:3000/register`
+2. Fill in the form:
+   - Name: Your name
+   - Email: test@example.com
+   - Password: password123
+   - Role: Patient or Doctor
+3. Click "Register"
+4. You should be logged in and redirected to the home page
+
+### Login
+1. Open `http://localhost:3000/login`
+2. Enter your credentials
+3. Click "Login"
+4. You should be redirected to the home page
+
+### Logout
+1. On the home page, click "Logout"
+2. You should be redirected to the login page
+
+### Protected Routes
+1. Try accessing `http://localhost:3000/chat` without logging in
+2. You should be redirected to the login page
+3. Log in and try again
+4. You should be able to access the page
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login
+- `POST /api/auth/refresh` - Refresh access token
+- `POST /api/auth/logout` - Logout
+- `GET /api/auth/me` - Get current user
+
+### Health Check
+- `GET /health` - Server health check
+
+## Development Status
+
+### ✅ Phase 1: Authentication (Completed)
+- [x] Project setup
+- [x] MongoDB connection
+- [x] User model
+- [x] JWT authentication
+- [x] Register/Login/Logout API
+- [x] Frontend authentication pages
+- [x] Route protection
+
+### 🚧 Phase 2: Basic Chat (Next)
+- [ ] ChatRoom and Message models
+- [ ] Socket.io setup
+- [ ] Real-time messaging
+- [ ] Chat UI components
+
+### 📋 Phase 3-6: Upcoming
+- File/image sharing
+- Doctor profiles
+- Reservation system
+- UX improvements
+- Testing and deployment
+
+## Project Rules
+
+This project follows strict development rules defined in:
+- `docs/CLAUDE.md` - Repository-wide rules
+- `docs/CONTEXT.md` - Product context
+- `docs/FE/CLAUDE.md` - Frontend-specific rules
+
+Key principles:
+- Safety and reproducibility
+- No token/secret logging
+- Minimal changes
+- Verification before deployment
+
+## License
+
+ISC

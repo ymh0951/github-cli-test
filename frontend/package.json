@@ -1,0 +1,33 @@
+{
+  "name": "doctalk-frontend",
+  "version": "1.0.0",
+  "description": "DocTalk Reservation - Health Consultation Messenger Frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "build:dev": "nuxt build --dotenv .env.development",
+    "build:staging": "nuxt build --dotenv .env.staging",
+    "build:prod": "nuxt build --dotenv .env.production",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "test:e2e": "cypress open"
+  },
+  "dependencies": {
+    "nuxt": "^3.9.3",
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7",
+    "axios": "^1.6.5",
+    "socket.io-client": "^4.6.1"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.0.8",
+    "sass": "^1.69.7",
+    "typescript": "^5.3.3",
+    "vue-tsc": "^1.8.27",
+    "cypress": "^13.6.3"
+  }
+}
